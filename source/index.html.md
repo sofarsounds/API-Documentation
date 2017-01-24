@@ -114,7 +114,8 @@ currency | The currency the city takes payment in
     "id": 2,
     "location_name": 'Shoreditch',
     "location_latitude": '-51.5285',
-    "location_longitude": '-0.0847',
+    "location_longitude": '-0.0847',,
+    "closest_station": 'Old Street,
     "type": "Home",
     "image_url": 'http://cloudfront.com/url',
     "arrival_time": "2017-12-01 19:30",
@@ -127,12 +128,14 @@ currency | The currency the city takes payment in
     "location_name": 'Peckham',
     "location_latitude": '-51.4742',
     "location_longitude": '-0.0691',
+    "closest_station": 'Old Street',
     "type": "Home",
     "image_url": 'http://cloudfront.com/url',
     "arrival_time": "2017-12-05 19:30",
     "start_time": "2017-12-05 20:00",
     "end_time": '2017-12-05 22:30',
-    "ticket_price": '10.00'
+    "ticket_price": '10.00',
+    "closest_station": "Peckham Rye"
   }
 ```
 
@@ -151,6 +154,7 @@ id | The unique event id
 location_name | The neighbourhood of the event
 location_latitude | The latitude for the neigbourhood
 location_longitude | The longtiude for the beighbourhood
+closest_station | The name of the closest station
 type | The type of location either home/commercial
 image_url | The url on the CDN for the event image
 arrival_time | The arrival time including the date
