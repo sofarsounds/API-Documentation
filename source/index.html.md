@@ -30,17 +30,19 @@ This documentation is the implementation details for the Sofar Sounds.  This is 
 [
   {
     "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+    "title": "London",
+    "latitude": "-51.5074",
+    "longitude": "-0.1278",
+    "country": "United Kingdom",
+    "currency": "GBP"
   },
   {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+    "id": 1,
+    "title": "New York",
+    "latitude": "40.7128",
+    "longitude": "74.0059",
+    "country": "United States",
+    "currency": "USD"
   }
 ]
 ```
@@ -51,17 +53,27 @@ This endpoint retrieves all cities.
 
 `GET http://example.com/api/v1/cities`
 
+Parameter | Description
+--------- | -----------
+id | Sofar Sounds unique city id
+title | The title of the city
+latitude | Latitude for this city
+longitude | Longitude for this city
+country | Country this city is in
+currency | The currency the city takes payment in
+
 ## Get the nearest city
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "id": 1,
+  "title": "London",
+  "latitude": "-51.5074",
+  "longitude": "-0.1278",
+  "country": "United Kingdom",
+  "currency": "GBP"
 }
 ```
 
@@ -79,6 +91,17 @@ Parameter | Description
 latitude | The latitude of the users current location
 longitude | The longitude of the users current location
 
+### Returned Parameters
+
+Parameter | Description
+--------- | -----------
+id | Sofar Sounds unique city id
+title | The title of the city
+latitude | Latitude for this city
+longitude | Longitude for this city
+country | Country this city is in
+currency | The currency the city takes payment in
+
 # Events
 
 ## Get all events
@@ -88,23 +111,36 @@ longitude | The longitude of the users current location
 ```json
 {
   "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "location_name": 'Shoreditch',
+  "location_latitude": '-51.5285',
+  "location_longitude": '-0.0847',
+  "type": "Home",
+  "image_url": 'http://cloudfront.com/url',
+  "arrival_time": "2017-12-01 19:30",
+  "start_time": "2017-12-01 20:00",
+  "end_time": '2017-12-01 22:30',
+  "ticket_price": '10.00'
 }
 ```
 
-This endpoint retrieves a the closest city from latitude/longitude.
+This endpoint retrieves a list of all upcoming appliable events.
 
 
 ### HTTP Request
 
 `GET http://example.com/api/v1/events`
 
-### URL Parameters
+### Returned Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
-
+id | The unique event id
+location_name | The neighbourhood of the event
+location_latitude | The latitude for the neigbourhood
+location_longitude | The longtiude for the beighbourhood
+type | The type of location either home/commercial
+image_url | The url on the CDN for the event image
+arrival_time | The arrival time including the date
+start_time | The start time/date of the event
+end_time | The end time/date of the event
+ticket_price | The price of a ticket (charged in the cities currency)
