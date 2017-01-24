@@ -109,18 +109,31 @@ currency | The currency the city takes payment in
 > The above command returns JSON structured like this:
 
 ```json
-{
-  "id": 2,
-  "location_name": 'Shoreditch',
-  "location_latitude": '-51.5285',
-  "location_longitude": '-0.0847',
-  "type": "Home",
-  "image_url": 'http://cloudfront.com/url',
-  "arrival_time": "2017-12-01 19:30",
-  "start_time": "2017-12-01 20:00",
-  "end_time": '2017-12-01 22:30',
-  "ticket_price": '10.00'
-}
+[
+  {
+    "id": 2,
+    "location_name": 'Shoreditch',
+    "location_latitude": '-51.5285',
+    "location_longitude": '-0.0847',
+    "type": "Home",
+    "image_url": 'http://cloudfront.com/url',
+    "arrival_time": "2017-12-01 19:30",
+    "start_time": "2017-12-01 20:00",
+    "end_time": '2017-12-01 22:30',
+    "ticket_price": '10.00'
+  },
+  {
+    "id": 5,
+    "location_name": 'Peckham',
+    "location_latitude": '-51.4742',
+    "location_longitude": '-0.0691',
+    "type": "Home",
+    "image_url": 'http://cloudfront.com/url',
+    "arrival_time": "2017-12-05 19:30",
+    "start_time": "2017-12-05 20:00",
+    "end_time": '2017-12-05 22:30',
+    "ticket_price": '10.00'
+  }
 ```
 
 This endpoint retrieves a list of all upcoming appliable events.
