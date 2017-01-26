@@ -121,7 +121,8 @@ currency | The currency the city takes payment in
     "arrival_time": "2017-12-01 19:30",
     "start_time": "2017-12-01 20:00",
     "end_time": '2017-12-01 22:30',
-    "ticket_price": '10.00'
+    "ticket_price": '10.00',
+    "event_url": 'https://www.sofarsounds.com/cities/london/events/2'
   },
   {
     "id": 5,
@@ -135,7 +136,8 @@ currency | The currency the city takes payment in
     "start_time": "2017-12-05 20:00",
     "end_time": '2017-12-05 22:30',
     "ticket_price": '10.00',
-    "closest_station": "Peckham Rye"
+    "closest_station": "Peckham Rye",
+    "event_url": 'https://www.sofarsounds.com/cities/london/events/5'
   }
 ```
 
@@ -161,3 +163,4 @@ arrival_time | The arrival time including the date
 start_time | The start time/date of the event
 end_time | The end time/date of the event
 ticket_price | The price of a ticket (charged in the cities currency)
+event_url | The full url that leads to the event page
