@@ -112,7 +112,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href="https://github.com/tripit/slate">Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -122,7 +122,9 @@
 
 <p>This documentation is the implementation details for the Sofar Sounds.  This is beta and is still in development and subject to change.</p>
 
-<h1 id="users">Users</h1>
+<h1 id="authentication">Authentication</h1>
+
+<p>A user can be authenticated by sending an / password to the signin route.  If authentication succeeds a token will be returned along with the user details.  This token can then be sent in later requests as an X_SESSION_TOKEN header to authenticate the user. </p>
 
 <h2 id="sign-in-a-user">Sign in a user</h2>
 
@@ -130,35 +132,481 @@
 <p>A succesful command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="err">token:</span><span class="w"> </span><span class="err">'098f6bcd4621d373cade4e832627b4f6'</span><span class="w">
+  </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2pJr4k_9QQJUsxeVVviy"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"birth_year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1983"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mobile_notification_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mobile_country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mobile_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7890123456"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"push_notification_gig_offers"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"push_notification_gig_updates"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"push_notification_gig_suggestions"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email_setting_unlucky"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email_setting_marketing"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email_setting_offers"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gig_preferences"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"day_of_week"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"monday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"friday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sunday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"tuesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"thursday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"saturday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"wednesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>An unsuccesful command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="err">error:</span><span class="w"> </span><span class="err">'Sorry,</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">entered</span><span class="w"> </span><span class="err">email</span><span class="w"> </span><span class="err">may</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">incorrect.</span><span class="w"> </span><span class="err">If</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">problem</span><span class="w"> </span><span class="err">persists,</span><span class="w"> </span><span class="err">please</span><span class="w"> </span><span class="err">email</span><span class="w"> </span><span class="err">website@sofarsounds.com'</span><span class="w">
+  </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sorry, the entered email may be incorrect. If this problem persists, please email website@sofarsounds.com"</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint will return a token which can be used in subsequent requests to authenticate against a user or it will return error responses.</p>
 
-</span><span class="err">This</span><span class="w"> </span><span class="err">endpoint</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">token</span><span class="w"> </span><span class="err">which</span><span class="w"> </span><span class="err">can</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">used</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">subsequent</span><span class="w"> </span><span class="err">requests</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">authenticate</span><span class="w"> </span><span class="err">against</span><span class="w"> </span><span class="err">a</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="err">it</span><span class="w"> </span><span class="err">will</span><span class="w"> </span><span class="err">return</span><span class="w"> </span><span class="err">error</span><span class="w"> </span><span class="err">responses.</span><span class="w">
+<h3 id="http-request">HTTP Request</h3>
 
-</span><span class="err">###</span><span class="w"> </span><span class="err">HTTP</span><span class="w"> </span><span class="err">Request</span><span class="w">
+<p><code class="prettyprint">GET http://www.sofarsounds.com/api/v1/signin</code></p>
 
-</span><span class="err">`GET</span><span class="w"> </span><span class="err">http://example.com/api/v</span><span class="mi">1</span><span class="err">/signin`</span><span class="w">
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>An email address to authenticate with</td>
+</tr>
+<tr>
+<td>password</td>
+<td>A password to authenticate with</td>
+</tr>
+</tbody></table>
 
-</span><span class="err">Parameter</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Description</span><span class="w">
-</span><span class="err">---------</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">-----------</span><span class="w">
-</span><span class="err">email</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">An</span><span class="w"> </span><span class="err">email</span><span class="w"> </span><span class="err">address</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">authenticate</span><span class="w"> </span><span class="err">with</span><span class="w">
-</span><span class="err">password</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">A</span><span class="w"> </span><span class="err">password</span><span class="w"> </span><span class="err">to</span><span class="w"> </span><span class="err">authenticate</span><span class="w"> </span><span class="err">with</span><span class="w">
+<h3 id="return-parameters">Return Parameters</h3>
 
-</span><span class="err">#</span><span class="w"> </span><span class="err">Cities</span><span class="w">
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>A token that can be used to authenticate on later requests</td>
+</tr>
+<tr>
+<td>user</td>
+<td>An additional structure of users details. <a href="#user">Find out more about the user object</a></td>
+</tr>
+</tbody></table>
 
-</span><span class="err">##</span><span class="w"> </span><span class="err">Get</span><span class="w"> </span><span class="err">All</span><span class="w"> </span><span class="err">Cities</span><span class="w">
+<h1 id="account">Account</h1>
 
-</span><span class="err">&gt;</span><span class="w"> </span><span class="err">The</span><span class="w"> </span><span class="err">above</span><span class="w"> </span><span class="err">command</span><span class="w"> </span><span class="err">returns</span><span class="w"> </span><span class="err">JSON</span><span class="w"> </span><span class="err">structured</span><span class="w"> </span><span class="err">like</span><span class="w"> </span><span class="err">this:</span><span class="w">
+<h2 id="request-a-password-reset">Request a password reset</h2>
 
-</span><span class="err">```json</span><span class="w">
-</span><span class="p">[</span><span class="w">
+<blockquote>
+<p>Will return JSON:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password reset request created"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This will trigger an email to be sent with password reset instructions, which will direct to the website not the app. This will return success wether we send a password reset request or not.</p>
+
+<h3 id="http-request">HTTP request</h3>
+
+<p><code class="prettyprint">POST http://www.sofarsounds.com/api/v1/reset_password_request</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>An email address to reset the password on</td>
+</tr>
+</tbody></table>
+
+<h1 id="users">Users</h1>
+
+<h2 id="create-an-account">Create an account</h2>
+
+<blockquote>
+<p>A succesful command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2pJr4k_9QQJUsxeVVviy"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"birth_year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1983"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mobile_notification_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mobile_country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"mobile_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7890123456"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"push_notification_gig_offers"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"push_notification_gig_updates"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"push_notification_gig_suggestions"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email_setting_unlucky"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email_setting_marketing"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email_setting_offers"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gig_preferences"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"day_of_week"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"monday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"friday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sunday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"tuesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"thursday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"saturday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"wednesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Creates an account on the platform</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://www.sofarsounds.com/api/v1/user</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>first_name</td>
+<td>First name for accout</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>Last name for account</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Email for account</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Password for account</td>
+</tr>
+</tbody></table>
+
+<h3 id="return-parameters">Return Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>Can be used for later authentication</td>
+</tr>
+<tr>
+<td>user</td>
+<td>An additional structure of users details. <a href="#user">Find out more about the user object</a></td>
+</tr>
+</tbody></table>
+
+<h2 id="get-account-details">Get account details</h2>
+
+<blockquote>
+<p>A succesful command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"birth_year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1983"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"mobile_notification_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"mobile_country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"mobile_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7890123456"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"push_notification_gig_offers"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"push_notification_gig_updates"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"push_notification_gig_suggestions"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_setting_unlucky"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_setting_marketing"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_setting_offers"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gig_preferences"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"day_of_week"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"monday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"friday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sunday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tuesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"thursday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"saturday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"wednesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Returns the details for the user who is authenticated</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://www.sofarsounds.com/api/v1/user</code></p>
+
+<h3 id="return-parameters">Return Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user</td>
+<td>An structure of users details. <a href="#user">Find out more about the user object</a></td>
+</tr>
+</tbody></table>
+
+<h2 id="update-account-details">Update account details</h2>
+
+<blockquote>
+<p>A succesful command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"birth_year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1983"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"mobile_notification_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"mobile_country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"mobile_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7890123456"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"push_notification_gig_offers"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"push_notification_gig_updates"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"push_notification_gig_suggestions"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_setting_unlucky"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_setting_marketing"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_setting_offers"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gig_preferences"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"day_of_week"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"monday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"friday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sunday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tuesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"thursday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"saturday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"wednesday"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Updates the details for the user who is authenticated</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT http://www.sofarsounds.com/api/v1/user</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>first_name</td>
+<td></td>
+</tr>
+<tr>
+<td>last_name</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td></td>
+</tr>
+<tr>
+<td>gender</td>
+<td></td>
+</tr>
+<tr>
+<td>birth_year</td>
+<td></td>
+</tr>
+<tr>
+<td>email_setting_marketing</td>
+<td></td>
+</tr>
+<tr>
+<td>email_setting_offers</td>
+<td></td>
+</tr>
+<tr>
+<td>email_setting_unlucky</td>
+<td></td>
+</tr>
+<tr>
+<td>push_notification_gig_updates</td>
+<td></td>
+</tr>
+<tr>
+<td>push_notification_gig_suggestions</td>
+<td></td>
+</tr>
+<tr>
+<td>push_notification_gig_offers</td>
+<td></td>
+</tr>
+<tr>
+<td>mobile_notification_on</td>
+<td></td>
+</tr>
+<tr>
+<td>mobile_country_code</td>
+<td></td>
+</tr>
+<tr>
+<td>mobile_number_body</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="register-a-push-token">Register a push token</h2>
+
+<p>Registers a new push token for the authenticated user</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://www.sofarsounds.com/api/v1/user/push_tokens</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>The token provided for push notfications</td>
+</tr>
+<tr>
+<td>os</td>
+<td>either ios or android</td>
+</tr>
+</tbody></table>
+
+<h1 id="gig-preferences">Gig Preferences</h1>
+
+<h2 id="day-of-the-week">Day of the week</h2>
+
+<blockquote>
+<p>A succesful command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"birth_year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1983"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"mobile_notification_on"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"mobile_country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GB"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"mobile_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7890123456"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"male"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"push_notification_gig_offers"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"push_notification_gig_updates"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"push_notification_gig_suggestions"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_setting_unlucky"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_setting_marketing"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email_setting_offers"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"gig_preferences"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"day_of_week"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"monday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"friday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"sunday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tuesday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"thursday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"saturday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"wednesday"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Update the users preference for days of the week they would like to attend</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT http://www.sofarsounds.com/api/v1/user/gig_preferences/day_of_week</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>monday</td>
+<td>true/false if they want to attend an event on this day</td>
+</tr>
+<tr>
+<td>tuesday</td>
+<td>true/false if they want to attend an event on this day</td>
+</tr>
+<tr>
+<td>wednesday</td>
+<td>true/false if they want to attend an event on this day</td>
+</tr>
+<tr>
+<td>thursday</td>
+<td>true/false if they want to attend an event on this day</td>
+</tr>
+<tr>
+<td>friday</td>
+<td>true/false if they want to attend an event on this day</td>
+</tr>
+<tr>
+<td>saturday</td>
+<td>true/false if they want to attend an event on this day</td>
+</tr>
+<tr>
+<td>sunday</td>
+<td>true/false if they want to attend an event on this day</td>
+</tr>
+</tbody></table>
+
+<h3 id="return-parameters">Return Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user</td>
+<td>An additional structure of users details. <a href="#user">Find out more about the user object</a></td>
+</tr>
+</tbody></table>
+
+<h1 id="cities">Cities</h1>
+
+<h2 id="get-all-cities">Get All Cities</h2>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"London"</span><span class="p">,</span><span class="w">
@@ -181,7 +629,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/api/v1/cities</code></p>
+<p><code class="prettyprint">GET http://www.sofarsounds.com/api/v1/cities</code></p>
 
 <table><thead>
 <tr>
@@ -233,7 +681,7 @@
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/api/v1/cities/nearest</code></p>
+<p><code class="prettyprint">GET http://www.sofarsounds.com/api/v1/cities/nearest</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -297,39 +745,39 @@
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_name"</span><span class="p">:</span><span class="w"> </span><span class="err">'Shoreditch'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_latitude"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">-51.5285</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_longitude"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">-0.0847</span><span class="err">'</span><span class="p">,</span><span class="err">,</span><span class="w">
-    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="err">'Old</span><span class="w"> </span><span class="err">Street</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shoreditch"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-51.5285"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0847"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Old Street"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Home"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="err">'http://cloudfront.com/url'</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudfront.com/url"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"arrival_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-01 19:30"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-01 20:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mi">2017-12-01</span><span class="w"> </span><span class="mi">22</span><span class="err">:</span><span class="mi">30</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"ticket_price"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">10.00</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event_url"</span><span class="p">:</span><span class="w"> </span><span class="err">'https://www.sofarsounds.com/cities/london/events/</span><span class="mi">2</span><span class="err">'</span><span class="w">
+    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-01 22:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ticket_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.sofarsounds.com/cities/london/events/2"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_name"</span><span class="p">:</span><span class="w"> </span><span class="err">'Peckham'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_latitude"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">-51.4742</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_longitude"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">-0.0691</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="err">'Old</span><span class="w"> </span><span class="err">Street'</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Peckham"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-51.4742"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0691"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Old Street"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Home"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="err">'http://cloudfront.com/url'</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudfront.com/url"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"arrival_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-05 19:30"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-05 20:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mi">2017-12-05</span><span class="w"> </span><span class="mi">22</span><span class="err">:</span><span class="mi">30</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"ticket_price"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">10.00</span><span class="err">'</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-05 22:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ticket_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Peckham Rye"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event_url"</span><span class="p">:</span><span class="w"> </span><span class="err">'https://www.sofarsounds.com/cities/london/events/</span><span class="mi">5</span><span class="err">'</span><span class="w">
+    </span><span class="nt">"event_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.sofarsounds.com/cities/london/events/5"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves a list of all upcoming appliable events.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/api/v1/events</code></p>
+<p><code class="prettyprint">GET http://www.sofarsounds.com/api/v1/events</code></p>
 
 <h3 id="returned-parameters">Returned Parameters</h3>
 
@@ -340,52 +788,8 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
-<td>The unique event id</td>
-</tr>
-<tr>
-<td>location_name</td>
-<td>The neighbourhood of the event</td>
-</tr>
-<tr>
-<td>location_latitude</td>
-<td>The latitude for the neigbourhood</td>
-</tr>
-<tr>
-<td>location_longitude</td>
-<td>The longtiude for the beighbourhood</td>
-</tr>
-<tr>
-<td>closest_station</td>
-<td>The name of the closest station</td>
-</tr>
-<tr>
-<td>type</td>
-<td>The type of location either home/commercial</td>
-</tr>
-<tr>
-<td>image_url</td>
-<td>The url on the CDN for the event image</td>
-</tr>
-<tr>
-<td>arrival_time</td>
-<td>The arrival time including the date</td>
-</tr>
-<tr>
-<td>start_time</td>
-<td>The start time/date of the event</td>
-</tr>
-<tr>
-<td>end_time</td>
-<td>The end time/date of the event</td>
-</tr>
-<tr>
-<td>ticket_price</td>
-<td>The price of a ticket (charged in the cities currency)</td>
-</tr>
-<tr>
-<td>event_url</td>
-<td>The full url that leads to the event page</td>
+<td>events</td>
+<td>A list of event structures. <a href="#event">Find out more about the event object</a></td>
 </tr>
 </tbody></table>
 
@@ -397,39 +801,39 @@
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_name"</span><span class="p">:</span><span class="w"> </span><span class="err">'Shoreditch'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_latitude"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">-51.5285</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_longitude"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">-0.0847</span><span class="err">'</span><span class="p">,</span><span class="err">,</span><span class="w">
-    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="err">'Old</span><span class="w"> </span><span class="err">Street</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shoreditch"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-51.5285"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0847"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Old Street"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Home"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="err">'http://cloudfront.com/url'</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudfront.com/url"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"arrival_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-01 19:30"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-01 20:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mi">2017-12-01</span><span class="w"> </span><span class="mi">22</span><span class="err">:</span><span class="mi">30</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"ticket_price"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">10.00</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event_url"</span><span class="p">:</span><span class="w"> </span><span class="err">'https://www.sofarsounds.com/cities/london/events/</span><span class="mi">2</span><span class="err">'</span><span class="w">
+    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-01 22:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ticket_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.sofarsounds.com/cities/london/events/2"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_name"</span><span class="p">:</span><span class="w"> </span><span class="err">'Peckham'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_latitude"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">-51.4742</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"location_longitude"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">-0.0691</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="err">'Old</span><span class="w"> </span><span class="err">Street'</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Peckham"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-51.4742"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0691"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Old Street"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Home"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="err">'http://cloudfront.com/url'</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudfront.com/url"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"arrival_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-05 19:30"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-05 20:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mi">2017-12-05</span><span class="w"> </span><span class="mi">22</span><span class="err">:</span><span class="mi">30</span><span class="err">'</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"ticket_price"</span><span class="p">:</span><span class="w"> </span><span class="err">'</span><span class="mf">10.00</span><span class="err">'</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-05 22:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ticket_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Peckham Rye"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"event_url"</span><span class="p">:</span><span class="w"> </span><span class="err">'https://www.sofarsounds.com/cities/london/events/</span><span class="mi">5</span><span class="err">'</span><span class="w">
+    </span><span class="nt">"event_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.sofarsounds.com/cities/london/events/5"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves a list of all upcoming appliable events for a particular city.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/api/v1/cities/:city_id/events</code></p>
+<p><code class="prettyprint">GET http://www.sofarsounds.com/api/v1/cities/:city_id/events</code></p>
 
 <h3 id="url-paramaeters">URL paramaeters</h3>
 
@@ -446,6 +850,177 @@
 </tbody></table>
 
 <h3 id="returned-parameters">Returned Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>events</td>
+<td>A list of event structures. <a href="#event">Find out more about the event object</a></td>
+</tr>
+</tbody></table>
+
+<h2 id="get-users-invited-events">Get users invited events</h2>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shoreditch"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-51.5285"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0847"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Old Street"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Home"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudfront.com/url"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"arrival_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-01 19:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-01 20:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-01 22:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ticket_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.sofarsounds.com/cities/london/events/2"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Peckham"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_latitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-51.4742"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"location_longitude"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-0.0691"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Old Street"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Home"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://cloudfront.com/url"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"arrival_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-05 19:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-05 20:00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-12-05 22:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ticket_price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.00"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"closest_station"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Peckham Rye"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"event_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.sofarsounds.com/cities/london/events/5"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Get a list of all upcoming events a user has been invited to where they are unconfirmed (not marked as can go/cant go)</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://www.sofarsounds.com/api/v1/user/push_tokens</code></p>
+
+<h3 id="returned-parameters">Returned Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>events</td>
+<td>A list of event structures. <a href="#event">Find out more about the event object</a></td>
+</tr>
+</tbody></table>
+
+<h2 id="mark-as-cant-make-it">Mark as cant make it</h2>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Attendee has been invited"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Mark a user as cant make it to an event</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://www.sofarsounds.com/api/v1/events/:event_id/cant_make_it</code></p>
+
+<h3 id="url-paramaeters">URL paramaeters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>reason</td>
+<td>(optional) A reason the user is unable to attend</td>
+</tr>
+</tbody></table>
+
+<h1 id="objects">Objects</h1>
+
+<h2 id="user">User</h2>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>A token that can be used to authenticate on later requests</td>
+</tr>
+<tr>
+<td>first_name</td>
+<td></td>
+</tr>
+<tr>
+<td>last_name</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td></td>
+</tr>
+<tr>
+<td>birth_year</td>
+<td>The year they selected as when they were born</td>
+</tr>
+<tr>
+<td>mobile_notification_on</td>
+<td>Wether they have opted into SMS notifications</td>
+</tr>
+<tr>
+<td>mobile_country_code</td>
+<td>The ISO 2 letter country code which can be used to find the international dialling code</td>
+</tr>
+<tr>
+<td>mobile_number</td>
+<td>There mobile number minus any additional country specific calling codes</td>
+</tr>
+<tr>
+<td>gender</td>
+<td></td>
+</tr>
+<tr>
+<td>push_notification_gig_offers</td>
+<td></td>
+</tr>
+<tr>
+<td>push_notification_gig_updates</td>
+<td></td>
+</tr>
+<tr>
+<td>push_notification_gig_suggestions</td>
+<td></td>
+</tr>
+<tr>
+<td>email_setting_unlucky</td>
+<td>Wether they have opted in to receive unlucky emails</td>
+</tr>
+<tr>
+<td>email_setting_marketing</td>
+<td>Wether they receive the monthly newsletter</td>
+</tr>
+<tr>
+<td>email_setting_offers</td>
+<td>Wether they receive any additional emails of offers</td>
+</tr>
+<tr>
+<td>gig_preferences day_of_week</td>
+<td>A hash of days of the week they would like to attend shows</td>
+</tr>
+</tbody></table>
+
+<h2 id="event">Event</h2>
 
 <table><thead>
 <tr>
